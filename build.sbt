@@ -5,13 +5,14 @@ version := "1.0"
 lazy val `Agora-REST-API` = (project in file(".")).enablePlugins(PlayScala)
 scalacOptions ++= Seq("-deprecation", "-language:_")
 
-scalaVersion := "2.12.3"
-val reactiveMongoVersion = "0.20.10-play27"
+scalaVersion := "2.12.10"
+//scalaVersion := "2.12.3"
+val reactiveMongoVersion = "0.20.13-play27"
 val silhouetteVersion = "6.1.1"
 val playMailerVersion = "7.0.1"
 val playJsonVersion = "2.7.4"
 val swaggerPlay2Version = "1.7.1"
-val swaggerUIVersion = "3.25.2"
+val swaggerUIVersion = "4.0.0"
 
 libraryDependencies ++= Seq(
   "org.reactivemongo" %% "play2-reactivemongo" % reactiveMongoVersion,
@@ -23,19 +24,21 @@ libraryDependencies ++= Seq(
   "com.iheart" %% "ficus" % "1.4.7",
   "com.typesafe.play" %% "play-mailer" % playMailerVersion,
   "com.typesafe.play" %% "play-mailer-guice" % playMailerVersion,
-  "com.enragedginger" %% "akka-quartz-scheduler" % "1.6.1-akka-2.5.x",
+  "com.enragedginger" %% "akka-quartz-scheduler" % "1.6.0-akka-2.4.x",
   "net.codingwell" %% "scala-guice" % "4.2.6",
   "com.adrianhurt" %% "play-bootstrap" % "1.6.1-P27-B4",
   "com.typesafe.play" %% "play-json" % playJsonVersion,
-  "org.typelevel" %% "spire" % "0.14.1",
+  "org.typelevel" %% "spire" % "0.17.0",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
   "com.typesafe.play" %% "play-json-joda" % playJsonVersion,
-  "io.swagger" %% "swagger-play2" % swaggerPlay2Version,
+  "io.swagger" %% "swagger-play2" % "1.7.1",
   "org.webjars" % "swagger-ui" % swaggerUIVersion,
   specs2 % Test,
   ehcache,
   guice
 )
+
+play.sbt.routes.RoutesKeys.routesImport += "play.modules.reactivemongo.PathBindables._"
 
 unmanagedResourceDirectories in Test += (baseDirectory.value / "target/web/public/test")
 
